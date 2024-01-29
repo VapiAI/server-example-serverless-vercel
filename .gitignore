@@ -8,3 +8,6 @@ public
 yarn-error.log
 
 .vercel
+
+*.env
+!example.env
