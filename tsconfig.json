@@ -18,7 +18,8 @@
     "config/**/*",
     "data/**/*",
     "functions/**/*",
-    "utils/**/*"
+    "utils/**/*", 
+    "types/**/*"
   ],
   "exclude": ["node_modules", "dist"]
 }

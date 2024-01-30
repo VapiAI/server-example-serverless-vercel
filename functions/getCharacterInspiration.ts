@@ -1,4 +1,5 @@
 import { SimpleDirectoryReader, VectorStoreIndex } from "llamaindex";
+import path from 'path';
 
 interface GetCharacterInspirationParams {
   inspiration: string;
@@ -13,8 +14,10 @@ export const getCharacterInspiration = async ({
   };
   if (inspiration) {
     try {
+
+      console.log('path.join(__dirname, "../data")', path.join(__dirname, "../data"))
       const documents = await new SimpleDirectoryReader().loadData({
-        directoryPath: "../data",
+        directoryPath: path.join(__dirname, "../data"),
       });
 
       const index = await VectorStoreIndex.fromDocuments(documents);
@@ -22,8 +25,9 @@ export const getCharacterInspiration = async ({
       const queryEngine = index.asQueryEngine();
       const response = await queryEngine.query({ query: inspiration });
 
-      return { result: response };
+      return { result: response.response };
     } catch (error) {
+      console.log('error', error)
       return fallbackResponse;
     }
   } else {

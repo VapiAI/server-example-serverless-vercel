@@ -1,24 +1,22 @@
 import { VercelRequest, VercelResponse } from "@vercel/node";
-import functions from "../../functions";
+import { getRandomName } from "../../functions/getRandomName";
+import { VapiPayload, VapiWebhookEnum } from "../../types/vapi.types";
+import { setCors } from "../../utils/cors.utils";
+import { functionCallHandler } from "../webhook/functionCall";
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
     if (req.method === "POST") {
-      const { message } = req.body;
+      setCors(res);
+      const payload = req.body.message as VapiPayload
 
-      const { type = "function-call", functionCall = {}, call } = message;
-      if (type === "function-call") {
-        if (Object.keys(functions).includes(functionCall?.name)) {
-          const response = await functions[functionCall?.name](
-            functionCall?.parameters
-          );
+      if (payload.type === VapiWebhookEnum.FUNCTION_CALL) {
+        const result = functionCallHandler(payload, { getRandomName });
 
-          return res.status(201).json(response);
-        }
-
-        return res.status(201).json({ data: functionCall?.parameters });
+        return res.status(201).json(result);
       }
 
+      // For the other types of messages, check ../webhook/index.ts
       return res.status(201).json({});
     }
 

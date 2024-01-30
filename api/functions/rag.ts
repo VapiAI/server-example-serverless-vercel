@@ -1,12 +1,21 @@
 import { VercelRequest, VercelResponse } from "@vercel/node";
+import { getCharacterInspiration } from "../../functions/getCharacterInspiration";
+import { VapiPayload, VapiWebhookEnum } from "../../types/vapi.types";
 import { setCors } from "../../utils/cors.utils";
-import { getWeather } from "../../functions/weather";
+import { functionCallHandler } from "../webhook/functionCall";
 
 export default async (req: VercelRequest, res: VercelResponse) => {
-  if (req.method === "GET") {
-    const { city } = req.query as { city: string };
+  if (req.method === "POST") {
+
     setCors(res);
-    return res.status(200).json({ weather: await getWeather({ city }) });
+    const payload = req.body.message as VapiPayload
+
+    if (payload.type === VapiWebhookEnum.FUNCTION_CALL) {
+      const result = functionCallHandler(payload, { getCharacterInspiration });
+
+      return res.status(201).json(result);
+    }
+    return res.status(201).json({});
   }
 
   setCors(res);
