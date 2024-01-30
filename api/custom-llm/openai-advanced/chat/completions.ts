@@ -8,9 +8,9 @@ const openai = new OpenAI({ apiKey: envConfig.openai.apiKey });
 export default async (req: VercelRequest, res: VercelResponse) => {
   if (req.method !== "POST") {
     return res.status(404).json({ message: "Not Found" });
-  } 
+  }
 
-  setCors(res)
+  setCors(res);
 
   try {
     const { model, messages, max_tokens, temperature, stream, ...restParams } =
@@ -20,19 +20,24 @@ export default async (req: VercelRequest, res: VercelResponse) => {
     const prompt = await openai.completions.create({
       model: "gpt-3.5-turbo-instruct",
       prompt: `
-        Create a prompt which can act as a prompt templete where I put the original prompt and it can modify it according to my intentions so that the final modified prompt is more detailed.You can expand certain terms or keywords.`
-      })
+        Create a prompt which can act as a prompt templete where I put the original prompt and it can modify it according to my intentions so that the final modified prompt is more detailed.You can expand certain terms or keywords.
+        ----------
+        PROMPT: ${lastMessage.content}.
+        MODIFIED PROMPT: `,
+      max_tokens: 500,
+      temperature: 0.7,
+    });
 
-
-
-      
-    const modifiedMessage = [...messages.slice(0, messages.length - 1), {...lastMessage, content: prompt}]
+    const modifiedMessage = [
+      ...messages.slice(0, messages.length - 1),
+      { ...lastMessage, content: prompt.choices[0].text },
+    ];
 
     if (stream) {
       const completionStream = await openai.chat.completions.create({
         model: model || "gpt-3.5-turbo",
         ...restParams,
-        messages:modifiedMessage,
+        messages: modifiedMessage,
         max_tokens: max_tokens || 150,
         temperature: temperature || 0.7,
         stream: true,
