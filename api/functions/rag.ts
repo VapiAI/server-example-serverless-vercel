@@ -1,6 +1,6 @@
 import { VercelRequest, VercelResponse } from "@vercel/node";
-import { setCors } from "../utils/cors.utils";
-import { getWeather } from "../functions/weather";
+import { setCors } from "../../utils/cors.utils";
+import { getWeather } from "../../functions/weather";
 
 export default async (req: VercelRequest, res: VercelResponse) => {
   if (req.method === "GET") {
