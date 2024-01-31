@@ -179,10 +179,16 @@ export interface AssistantRequestMessageResponse {
 }
 
 export interface StatusUpdateMessageResponse {}
+export interface SpeechUpdateMessageResponse {}
+export interface TranscriptMessageResponse {}
+export interface HangMessageResponse {}
 export interface EndOfCallReportMessageResponse {}
 
 export type VapiResponse =
-  | FunctionCallMessageResponse
   | AssistantRequestMessageResponse
+  | FunctionCallMessageResponse
+  | EndOfCallReportMessageResponse
+  | HangMessageResponse
   | StatusUpdateMessageResponse
-  | EndOfCallReportMessageResponse;
+  | SpeechUpdateMessageResponse
+  | TranscriptMessageResponse;

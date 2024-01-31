@@ -1,33 +1,12 @@
-import { createClient } from "@supabase/supabase-js";
-import { envConfig } from "../../config/env.config";
-import {
-  EndOfCallReportMessageResponse,
-  EndOfCallReportPayload,
-} from "../../types/vapi.types";
-
-const supabase = createClient(
-  envConfig.supabase.url,
-  envConfig.supabase.anonKey
-);
+import { EndOfCallReportPayload } from "../../types/vapi.types";
 
 export const endOfCallReportHandler = async (
   payload?: EndOfCallReportPayload
 ): Promise<void> => {
-  const { data, error } = await supabase
-    .from("conversation")
-    .insert([
-      {
-        status: "ended",
-        summary: payload.summary,
-        transcript: payload.transcript,
-        recording: payload.recordingUrl,
-      },
-    ])
-    .select();
+  /**
+   * Handle Business logic here.
+   * You can store the information like summary, typescript, recordingUrl or even the full messages list in the database.
+   */
 
-  if (error) {
-    console.error("Error inserting data", error);
-  }
-
-  console.log("Data inserted", data);
+  return;
 };
