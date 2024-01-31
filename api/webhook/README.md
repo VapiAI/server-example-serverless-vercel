@@ -52,3 +52,9 @@ Welcome to the guide on handling Server URL events with Vapi. The Server URL is 
 - Description: Sent during a call whenever a transcript is available for a certain chunk in the stream.
 - Use Case: Store transcripts for analysis or real-time processing.
 - Example Implementation: See `.transcript.ts` for handling transcript updates.
+
+## Dynamic Shared context.
+
+There could be scenarios where you may want to have some shared context across all the interactions b/w the Backend and the Vapi. You can do so by using a serverUrl which has a id which you can use to fetch shared context.
+
+For example in the current implementation, `/api/webhook/<conversation_uuid>` can be used to configure when creating the assistant. So that whenever any webhook is triggered for that assistant you can fetch the context using conversation_uuid.
