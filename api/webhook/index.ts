@@ -12,6 +12,13 @@ import { setCors } from "../../utils/cors.utils";
 export default async (req: VercelRequest, res: VercelResponse) => {
   if ((req.method = "POST")) {
     setCors(res);
+    const conversationUuid = req.query.conversation_uuid as string;
+
+    if (conversationUuid) {
+      // This way we can fetch some data from database and use it in the handlers.
+      // Here you can fetch some context which will be shared accorss all the webhook events for this conversation.
+      console.log("conversationUuid", conversationUuid);
+    }
     try {
       const payload = req.body.message as VapiPayload;
       console.log("type", payload.type, payload);

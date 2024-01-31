@@ -2,7 +2,12 @@
   "routes": [
     {
       "src": "/api/webhook",
-      "dest": "/api/webhook.ts",
+      "dest": "/api/webhook/index.ts",
+      "methods": ["POST"]
+    },
+    {
+      "src": "/api/webhook/(?<conversation_uuid>[A-Za-z0-9-_]+)",
+      "dest": "/api/webhook/index.ts?conversation_uuid=$1",
       "methods": ["POST"]
     },
     {
