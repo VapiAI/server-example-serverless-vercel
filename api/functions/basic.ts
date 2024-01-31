@@ -2,21 +2,37 @@ import { VercelRequest, VercelResponse } from "@vercel/node";
 import { getRandomName } from "../../functions/getRandomName";
 import { VapiPayload, VapiWebhookEnum } from "../../types/vapi.types";
 import { setCors } from "../../utils/cors.utils";
-import { functionCallHandler } from "../webhook/functionCall";
 
+/**
+ * Handles POST requests from Vapi to perform function calls.
+ * Specifically, it processes the `getRandomName` function call, which fetches a random name using a public API.
+ * If the function call is valid and the name matches 'getRandomName', it executes the function and returns the result.
+ * If the function name is not found, it logs an error message and throws an exception indicating the function is not found.
+ * This handler is a basic example of how to implement function calls in Vapi without referring to other webhook handlers.
+ */
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
     if (req.method === "POST") {
       setCors(res);
-      const payload = req.body.message as VapiPayload
+      const payload = req.body.message as VapiPayload;
 
       if (payload.type === VapiWebhookEnum.FUNCTION_CALL) {
-        const result = functionCallHandler(payload, { getRandomName });
+        const { functionCall } = payload;
 
-        return res.status(201).json(result);
+        if (!functionCall) {
+          throw new Error("Invalid Request.");
+        }
+
+        const { name, parameters } = functionCall;
+        if (name === "getRandomName") {
+          const result = await getRandomName(parameters);
+          return res.status(201).json(result);
+        } else {
+          console.log(`Function ${name} not found`);
+          throw new Error(`Function ${name} not found`);
+        }
       }
 
-      // For the other types of messages, check ../webhook/index.ts
       return res.status(201).json({});
     }
 
