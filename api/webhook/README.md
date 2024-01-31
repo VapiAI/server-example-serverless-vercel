@@ -4,7 +4,7 @@ Welcome to the guide on handling Server URL events with Vapi. The Server URL is 
 
 ## Available Events and Their Uses
 
-### Function Calling\*\*
+### Function Calling
 
 - Event: function-call
 - Description: Triggered when an assistant determines a function needs to be called based on the systemPrompt.
