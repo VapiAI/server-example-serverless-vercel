@@ -6,8 +6,15 @@ const openai = new OpenAI({ apiKey: envConfig.openai.apiKey });
 
 export default async (req: VercelRequest, res: VercelResponse) => {
   try {
-    const { model, messages, max_tokens, temperature, stream, ...restParams } =
-      req.body;
+    const {
+      model,
+      messages,
+      max_tokens,
+      temperature,
+      stream,
+      call,
+      ...restParams
+    } = req.body;
     const response = {
       id: "chatcmpl-8mcLf78g0quztp4BMtwd3hEj58Uof",
       object: "chat.completion.chunk",

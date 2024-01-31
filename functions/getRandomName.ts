@@ -35,6 +35,7 @@ export const getRandomName = async (params: NameParams) => {
     });
 
     const name = results.data.results[0].name;
+    console.log("results", params, name);
     return {
       result: name.first + " " + name.last,
     };

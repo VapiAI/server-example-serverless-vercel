@@ -20,6 +20,7 @@ export const functionCallHandler = async (
   }
 
   const { name, parameters } = functionCall;
+  console.log(name, parameters);
   if (Object.prototype.hasOwnProperty.call(functions, name)) {
     return await functions[name](parameters);
   } else {

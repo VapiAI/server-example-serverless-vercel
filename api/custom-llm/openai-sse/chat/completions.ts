@@ -8,13 +8,22 @@ const openai = new OpenAI({ apiKey: envConfig.openai.apiKey });
 export default async (req: VercelRequest, res: VercelResponse) => {
   if (req.method !== "POST") {
     return res.status(404).json({ message: "Not Found" });
-  } 
+  }
 
-  setCors(res)
+  setCors(res);
 
   try {
-    const { model, messages, max_tokens, temperature, stream, ...restParams } =
-      req.body;
+    const {
+      model,
+      messages,
+      max_tokens,
+      temperature,
+      call,
+      stream,
+      ...restParams
+    } = req.body;
+
+    console.log(req.body);
 
     if (stream) {
       const completionStream = await openai.chat.completions.create({

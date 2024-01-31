@@ -14,21 +14,22 @@ export default async (req: VercelRequest, res: VercelResponse) => {
     setCors(res);
     try {
       const payload = req.body.message as VapiPayload;
+      console.log("type", payload.type, payload);
       switch (payload.type) {
         case VapiWebhookEnum.FUNCTION_CALL:
-          return await functionCallHandler(payload);
+          return res.status(200).json(await functionCallHandler(payload));
         case VapiWebhookEnum.STATUS_UPDATE:
-          return await statusUpdateHandler(payload);
+          return res.status(201).json(await statusUpdateHandler(payload));
         case VapiWebhookEnum.ASSISTANT_REQUEST:
-          return await assistantRequestHandler(payload);
+          return res.status(201).json(await assistantRequestHandler(payload));
         case VapiWebhookEnum.END_OF_CALL_REPORT:
-          return await endOfCallReportHandler(payload);
+          return res.status(201).json(await endOfCallReportHandler(payload));
         case VapiWebhookEnum.SPEECH_UPDATE:
-          return await speechUpdateHandler(payload);
+          return res.status(201).json(await speechUpdateHandler(payload));
         case VapiWebhookEnum.TRANSCRIPT:
-          return await transcriptHandler(payload);
+          return res.status(201).json(await transcriptHandler(payload));
         case VapiWebhookEnum.HANG:
-          return await HangEventHandler(payload);
+          return res.status(201).json(await HangEventHandler(payload));
         default:
           throw new Error(`Unhandled message type`);
       }

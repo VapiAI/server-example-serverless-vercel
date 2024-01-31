@@ -13,8 +13,15 @@ export default async (req: VercelRequest, res: VercelResponse) => {
   setCors(res);
 
   try {
-    const { model, messages, max_tokens, temperature, stream, ...restParams } =
-      req.body;
+    const {
+      model,
+      messages,
+      max_tokens,
+      temperature,
+      stream,
+      call,
+      ...restParams
+    } = req.body;
 
     const lastMessage = messages?.[messages.length - 1];
     const prompt = await openai.completions.create({
