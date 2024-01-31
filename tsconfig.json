@@ -20,6 +20,6 @@
     "functions/**/*",
     "utils/**/*", 
     "types/**/*"
-  ],
+, "api/webhook/.*.ts"  ],
   "exclude": ["node_modules", "dist"]
 }

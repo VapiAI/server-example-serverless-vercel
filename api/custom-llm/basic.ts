@@ -1,6 +1,6 @@
 import { VercelRequest, VercelResponse } from "@vercel/node";
 import OpenAI from "openai";
-import { envConfig } from "../../../../config/env.config";
+import { envConfig } from "../../config/env.config";
 
 const openai = new OpenAI({ apiKey: envConfig.openai.apiKey });
 

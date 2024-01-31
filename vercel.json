@@ -1,0 +1,44 @@
+{
+  "routes": [
+    {
+      "src": "/api/webhook",
+      "dest": "/api/webhook.ts",
+      "methods": ["POST"]
+    },
+    {
+      "src": "/api/functions/basic",
+      "dest": "/api/functions/basic.ts",
+      "methods": ["POST"]
+    },
+    {
+      "src": "/api/functions/rag",
+      "dest": "/api/functions/rag.ts",
+      "methods": ["POST"]
+    },
+    {
+      "src": "/api/functions/inbound",
+      "dest": "/api/functions/inbound.ts",
+      "methods": ["POST"]
+    },
+    {
+      "src": "/api/functions/outbound",
+      "dest": "/api/functions/outbound.ts",
+      "methods": ["POST"]
+    },
+    {
+      "src": "/api/custom-llm/basic/chat/completions",
+      "dest": "/api/custom-llm/basic.ts",
+      "methods": ["POST"]
+    },
+    {
+      "src": "/api/custom-llm/openai-sse/chat/completions",
+      "dest": "/api/custom-llm/openai-sse.ts",
+      "methods": ["POST"]
+    },
+    {
+      "src": "/api/custom-llm/openai-advanced/chat/completions",
+      "dest": "/api/custom-llm/openai-advanced.ts",
+      "methods": ["POST"]
+    }
+  ]
+}

@@ -1,12 +1,12 @@
 import { VercelRequest, VercelResponse } from "@vercel/node";
 import { VapiPayload, VapiWebhookEnum } from "../../types/vapi.types";
-import { assistantRequestHandler } from "./assistantRequest";
-import { endOfCallReportHandler } from "./endOfCallReport";
-import { functionCallHandler } from "./functionCall";
-import { speechUpdateHandler } from "./speechUpdateHandler";
-import { statusUpdateHandler } from "./statusUpdate";
-import { transcriptHandler } from "./transcript";
-import { HangEventHandler } from "./hang";
+import { assistantRequestHandler } from "./.assistantRequest";
+import { endOfCallReportHandler } from "./.endOfCallReport";
+import { functionCallHandler } from "./.functionCall";
+import { speechUpdateHandler } from "./.speechUpdateHandler";
+import { statusUpdateHandler } from "./.statusUpdate";
+import { transcriptHandler } from "./.transcript";
+import { HangEventHandler } from "./.hang";
 import { setCors } from "../../utils/cors.utils";
 
 export default async (req: VercelRequest, res: VercelResponse) => {

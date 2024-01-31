@@ -1,7 +1,7 @@
 import { VercelRequest, VercelResponse } from "@vercel/node";
 import OpenAI from "openai";
-import { envConfig } from "../../../../config/env.config";
-import { setCors } from "../../../../utils/cors.utils";
+import { envConfig } from "../../config/env.config";
+import { setCors } from "../../utils/cors.utils";
 
 const openai = new OpenAI({ apiKey: envConfig.openai.apiKey });
 
@@ -18,23 +18,37 @@ export default async (req: VercelRequest, res: VercelResponse) => {
       messages,
       max_tokens,
       temperature,
-      call,
       stream,
+      call,
       ...restParams
     } = req.body;
 
-    console.log(req.body);
+    const lastMessage = messages?.[messages.length - 1];
+    const prompt = await openai.completions.create({
+      model: "gpt-3.5-turbo-instruct",
+      prompt: `
+        Create a prompt which can act as a prompt templete where I put the original prompt and it can modify it according to my intentions so that the final modified prompt is more detailed.You can expand certain terms or keywords.
+        ----------
+        PROMPT: ${lastMessage.content}.
+        MODIFIED PROMPT: `,
+      max_tokens: 500,
+      temperature: 0.7,
+    });
+
+    const modifiedMessage = [
+      ...messages.slice(0, messages.length - 1),
+      { ...lastMessage, content: prompt.choices[0].text },
+    ];
 
     if (stream) {
       const completionStream = await openai.chat.completions.create({
         model: model || "gpt-3.5-turbo",
         ...restParams,
-        messages,
+        messages: modifiedMessage,
         max_tokens: max_tokens || 150,
         temperature: temperature || 0.7,
         stream: true,
       } as OpenAI.Chat.ChatCompletionCreateParamsStreaming);
-
       res.setHeader("Content-Type", "text/event-stream");
       res.setHeader("Cache-Control", "no-cache");
       res.setHeader("Connection", "keep-alive");
@@ -47,7 +61,7 @@ export default async (req: VercelRequest, res: VercelResponse) => {
       const completion = await openai.chat.completions.create({
         model: model || "gpt-3.5-turbo",
         ...restParams,
-        messages,
+        messages: modifiedMessage,
         max_tokens: max_tokens || 150,
         temperature: temperature || 0.7,
         stream: false,
