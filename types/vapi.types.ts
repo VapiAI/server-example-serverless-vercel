@@ -3,7 +3,7 @@ import {
   ChatCompletionCreateParams,
   ChatCompletionMessageParam,
   FunctionDefinition,
-} from 'openai/resources';
+} from "openai/resources";
 
 export interface Model {
   model: string;
@@ -20,12 +20,12 @@ export interface Model {
 }
 
 const PLAY_HT_EMOTIONS = [
-  'female_happy',
-  'female_sad',
-  'female_angry',
-  'female_fearful',
-  'female_disgust',
-  'female_surprised',
+  "female_happy",
+  "female_sad",
+  "female_angry",
+  "female_fearful",
+  "female_disgust",
+  "female_surprised",
 ] as const;
 type PlayHTEmotion = (typeof PLAY_HT_EMOTIONS)[number];
 
@@ -48,7 +48,7 @@ export interface Assistant {
   // Properties from AssistantUserEditable
   name?: string;
   transcriber?: {
-    provider: 'deepgram';
+    provider: "deepgram";
     model?: string;
     keywords?: string[];
   };
@@ -82,25 +82,27 @@ export interface Assistant {
   updatedAt?: Date;
 }
 
-const VAPI_CALL_STATUSES = [
-  'queued',
-  'ringing',
-  'in-progress',
-  'forwarding',
-  'ended',
+export const VAPI_CALL_STATUSES = [
+  "queued",
+  "ringing",
+  "in-progress",
+  "forwarding",
+  "ended",
 ] as const;
 export type VapiCallStatus = (typeof VAPI_CALL_STATUSES)[number];
 
 export enum VapiWebhookEnum {
-  ASSISTANT_REQUEST = 'assistant-request',
-  FUNCTION_CALL = 'function-call',
-  STATUS_UPDATE = 'status-update',
-  END_OF_CALL_REPORT = 'end-of-call-report',
-  HANG = 'hang',
+  ASSISTANT_REQUEST = "assistant-request",
+  FUNCTION_CALL = "function-call",
+  STATUS_UPDATE = "status-update",
+  END_OF_CALL_REPORT = "end-of-call-report",
+  HANG = "hang",
+  SPEECH_UPDATE = "speech-update",
+  TRANSCRIPT = "transcript",
 }
 
 export interface ConversationMessage {
-  role: 'user' | 'system' | 'bot' | 'function_call' | 'function_result';
+  role: "user" | "system" | "bot" | "function_call" | "function_result";
   message?: string;
   name?: string;
   args?: string;
@@ -129,7 +131,7 @@ export interface FunctionCallPayload extends BaseVapiPayload {
   functionCall: ChatCompletionCreateParams.Function;
 }
 
-export interface EndOfCallReportPayload {
+export interface EndOfCallReportPayload extends BaseVapiPayload {
   type: VapiWebhookEnum.END_OF_CALL_REPORT;
   endedReason: string;
   transcript: string;
@@ -138,8 +140,21 @@ export interface EndOfCallReportPayload {
   recordingUrl?: string;
 }
 
-export interface HangPayload {
+export interface HangPayload extends BaseVapiPayload {
   type: VapiWebhookEnum.HANG;
+}
+
+export interface SpeechUpdatePayload extends BaseVapiPayload {
+  type: VapiWebhookEnum.SPEECH_UPDATE;
+  status: "started" | "stopped";
+  role: "assistant" | "user";
+}
+
+export interface TranscriptPayload {
+  type: VapiWebhookEnum.TRANSCRIPT;
+  role: "assistant" | "user";
+  transcriptType: "partial" | "final";
+  transcript: string;
 }
 
 export interface VapiCall {}
@@ -148,6 +163,8 @@ export type VapiPayload =
   | StatusUpdatePayload
   | FunctionCallPayload
   | EndOfCallReportPayload
+  | SpeechUpdatePayload
+  | TranscriptPayload
   | HangPayload;
 
 export type FunctionCallMessageResponse =

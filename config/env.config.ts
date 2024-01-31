@@ -7,4 +7,8 @@ export const envConfig = {
   openai: {
     apiKey: process.env.OPENAI_API_KEY ?? ``,
   },
+  supabase: {
+    url: process.env.SUPABASE_PROJECT_URL ?? ``,
+    anonKey: process.env.SUPABASE_ANON_KEY ?? ``,
+  },
 };

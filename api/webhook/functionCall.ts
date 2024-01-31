@@ -1,17 +1,14 @@
-import defaultFunctions from '../../functions';
-import {
-  FunctionCallPayload
-} from '../../types/vapi.types';
+import defaultFunctions from "../../functions";
+import { FunctionCallPayload } from "../../types/vapi.types";
 
-/**
- * Here will be all the logic for handling of the webhook events triggered by Vapi.
- */
-
-export const functionCallHandler = async (payload: FunctionCallPayload, functions: Record<string, Function> = defaultFunctions) => {
+export const functionCallHandler = async (
+  payload: FunctionCallPayload,
+  functions: Record<string, Function> = defaultFunctions
+) => {
   const { functionCall } = payload;
 
   if (!functionCall) {
-    throw new Error('Invalid Request.');
+    throw new Error("Invalid Request.");
   }
 
   const { name, parameters } = functionCall;

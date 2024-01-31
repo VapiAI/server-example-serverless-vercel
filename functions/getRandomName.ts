@@ -2,16 +2,8 @@ import axios from "axios";
 
 const nats = [
   "AU",
-  "BR",
   "CA",
-  "CH",
-  "DE",
-  "DK",
-  "ES",
-  "FI",
   "FR",
-  "GB",
-  "IE",
   "IN",
   "IR",
   "MX",
@@ -20,7 +12,6 @@ const nats = [
   "NZ",
   "RS",
   "TR",
-  "UA",
   "US",
 ];
 
