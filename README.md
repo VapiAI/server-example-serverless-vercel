@@ -22,10 +22,19 @@ To get started with this project:
 
 1. Clone the repository to your local machine.
 2. Install the dependencies by running `npm install`.
-3. Explore the `api` directory to understand how the function calling and custom LLM integrations and webhook event handling are set up.
-4. Review the types directory to see the data structures used for handling Vapi events and payloads.
-5. Check the data directory for sample data that the function for creative character prompts can use.
-6. Remove any unnecessary code and start adding your own logic.
+3. Setup Vercel using `vercel` command from the root directory. Install vercel cli if you don't have it using `npm i -g vercel`.
+4. Explore the `api` directory to understand how the function calling and custom LLM integrations and webhook event handling are set up.
+5. Review the types directory to see the data structures used for handling Vapi events and payloads.
+6. Check the data directory for sample data that the function for creative character prompts can use.
+7. Remove any unnecessary code and start adding your own logic.
+8. There is sample json in `./assistants` folder. You can use that to create Vapi assistant and then test it.
+
+## Assistant Setup.
+
+- **Using Dashboard**: For you to create an assistant you can create a simple one by directly going to your dashboard and creating one from the UI.
+- **Using POST Endpoint**: You can also create your assistant using POST `https://api.vapi.ai/assistant` with your API Key (Dashboard > Accounts > Vapi Keys) as Bearer Token and choose any body from `./assistants` folder.
+
+Once assistant is created You may setup your server Url (`http://<domain>/api/webhook`) in the Dashboard > Accounts > Settings > Server URL. This will set the server URL for all assistants. If you want to set the serverUrl per assistant by using `serverUrl` key in the assistant body while creating. 
 
 ## Usage
 
