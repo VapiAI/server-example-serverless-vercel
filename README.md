@@ -36,13 +36,13 @@ To get started with this project:
 
 Once assistant is created You may setup your server Url (`http://<domain>/api/webhook`) in the Dashboard > Accounts > Settings > Server URL. This will set the server URL for all assistants. If you want to set the serverUrl per assistant by using `serverUrl` key in the assistant body while creating. 
 
-## Usage
+## Samples
 
-To use the custom functionalities:
+This contains samples for:
 
-- **Invoke Functions**: Use voice commands to Vapi to trigger the functions for generating random names or providing character inspiration.
-- **Integrate LLM**: Set up an OpenAI-compatible _POST_ endpoint for `/chat/completions` to process requests from Vapi using a custom LLM.
-- **Handle Events**: Implement handlers for server URL events like assistant-request and function-call to dynamically respond during a call.
+- **Invoke Functions**: How to handle function calls triggerd by Vapi Assistant for generating random names or providing character inspiration.
+- **Custom LLMs**: How to set up an OpenAI-compatible _POST_ endpoint for `/chat/completions` to process requests from Vapi using a custom LLM.
+- **Handle Events**: How to implement handlers for server URL events like assistant-request and function-call to dynamically respond during a call.
 
 ## Examples
 
