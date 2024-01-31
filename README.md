@@ -1,14 +1,14 @@
 # Vapi Customization for Story Writers
 
-Welcome to the Vapi Customization sample project. This project demonstrates how developers can extend the functionalities of Vapi, a versatile voice assistant SDK, to create a unique experience tailored for story writers. By customizing Vapi, writers can design characters for their stories through voice interactions with the assistant.
+Welcome to the Vapi Customization sample project. This project demonstrates how you can extend the functionalities of Vapi, an abstraction layer for your personal assistant, to create a unique experience tailored for story writers. Using this project, writers can design characters for their stories through voice interactions with the assistant.
 
 ## Project Overview
 
 The project showcases the following customizations:
 
-- **Function Calling**: Writers can invoke custom functions to retrieve character inspirations and generate random names based on specific criteria.
-- **Custom Large Language Model (LLM) Integration**: Enhance conversational capabilities by integrating custom LLMs with Vapi for nuanced and context-aware interactions.
-- **Server URL Events**: Handle various events during a call's lifecycle, such as function calls and assistant requests, to provide dynamic responses.
+- **Function Calling**: Writers can invoke custom functions to retrieve character inspirations and generate random names based on specific criteria. For [more info](api/custom-llm/README.md)
+- **Custom Large Language Model (LLM) Integration**: Enhance conversational capabilities by integrating custom LLMs with Vapi for nuanced and context-aware interactions. For [more info](api/functions/README.md)
+- **Server URL Events**: Handle various events during a call's lifecycle, such as function calls and assistant requests, to provide dynamic responses. For [more info](api/webhook/README.md)
 
 ## Features
 
@@ -35,14 +35,6 @@ To get started with this project:
 - **Using POST Endpoint**: You can also create your assistant using POST `https://api.vapi.ai/assistant` with your API Key (Dashboard > Accounts > Vapi Keys) as Bearer Token and choose any body from `./assistants` folder.
 
 Once assistant is created You may setup your server Url (`http://<domain>/api/webhook`) in the Dashboard > Accounts > Settings > Server URL. This will set the server URL for all assistants. If you want to set the serverUrl per assistant by using `serverUrl` key in the assistant body while creating. 
-
-## Samples
-
-This contains samples for:
-
-- **Invoke Functions**: How to handle function calls triggerd by Vapi Assistant for generating random names or providing character inspiration.
-- **Custom LLMs**: How to set up an OpenAI-compatible _POST_ endpoint for `/chat/completions` to process requests from Vapi using a custom LLM.
-- **Handle Events**: How to implement handlers for server URL events like assistant-request and function-call to dynamically respond during a call.
 
 ## Examples
 
