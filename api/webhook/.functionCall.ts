@@ -24,7 +24,6 @@ export const functionCallHandler = async (
   if (Object.prototype.hasOwnProperty.call(functions, name)) {
     return await functions[name](parameters);
   } else {
-    console.log(`Function ${name} not found`);
-    throw new Error(`Function ${name} not found`);
+    return;
   }
 };
