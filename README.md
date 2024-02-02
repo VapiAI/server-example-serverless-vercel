@@ -1,6 +1,6 @@
-# Vapi Customization for Story Writers
+# Vapi Example for Serverless Vercel
 
-Welcome to the Vapi Customization sample project. This project demonstrates how you can extend the functionalities of Vapi, an abstraction layer for your personal assistant, to create a unique experience tailored for story writers. Using this project, writers can design characters for their stories through voice interactions with the assistant.
+Welcome to the Vapi Serverless Vercel sample project. This project demonstrates how you can extend the functionalities of Vapi, an abstraction layer for your personal assistant, to create a unique experience tailored for story writers. Using this project, writers can design characters for their stories through voice interactions with the assistant.
 
 ## Project Overview
 
