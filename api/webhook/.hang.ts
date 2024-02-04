@@ -1,8 +1,6 @@
 import {
   HangMessageResponse,
-  HangPayload,
-  TranscriptMessageResponse,
-  TranscriptPayload,
+  HangPayload
 } from "../../types/vapi.types";
 
 export const HangEventHandler = async (

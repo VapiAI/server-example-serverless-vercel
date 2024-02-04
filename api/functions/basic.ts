@@ -24,6 +24,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         }
 
         const { name, parameters } = functionCall;
+        console.log('functionCall', functionCall)
         if (name === "getRandomName") {
           const result = await getRandomName(parameters);
           return res.status(201).json(result);

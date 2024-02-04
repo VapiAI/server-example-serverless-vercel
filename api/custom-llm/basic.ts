@@ -17,7 +17,7 @@ export default async (req: VercelRequest, res: VercelResponse) => {
     } = req.body;
     const response = {
       id: "chatcmpl-8mcLf78g0quztp4BMtwd3hEj58Uof",
-      object: "chat.completion.chunk",
+      object: "chat.completion",
       created: Math.floor(Date.now() / 1000),
       model: "gpt-3.5-turbo-0613",
       system_fingerprint: null,

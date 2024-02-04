@@ -23,7 +23,7 @@ export const getCharacterInspiration = async ({
       const queryEngine = index.asQueryEngine();
       const response = await queryEngine.query({ query: inspiration });
 
-      return { result: response.response };
+      return { result: response.response, forwardToClientEnabled: true };
     } catch (error) {
       console.log("error", error);
       return fallbackResponse;

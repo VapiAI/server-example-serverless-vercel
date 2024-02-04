@@ -1,6 +1,11 @@
 {
   "routes": [
     {
+      "src": "/", 
+      "dest": "/api/index.ts", 
+      "methods": ["GET"]
+    }, 
+    {
       "src": "/api/webhook",
       "dest": "/api/webhook/index.ts",
       "methods": ["POST"]

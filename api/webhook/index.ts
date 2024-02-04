@@ -24,7 +24,7 @@ export default async (req: VercelRequest, res: VercelResponse) => {
       console.log("type", payload.type, payload);
       switch (payload.type) {
         case VapiWebhookEnum.FUNCTION_CALL:
-          return res.status(200).json(await functionCallHandler(payload));
+          return res.status(201).json(await functionCallHandler(payload));
         case VapiWebhookEnum.STATUS_UPDATE:
           return res.status(201).json(await statusUpdateHandler(payload));
         case VapiWebhookEnum.ASSISTANT_REQUEST:
