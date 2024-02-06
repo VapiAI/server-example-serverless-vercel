@@ -58,6 +58,8 @@ export default async (req: VercelRequest, res: VercelResponse) => {
               }
             : null;
           if (assistant) return { assistant };
+
+          break;
         default:
           throw new Error(`Unhandled message type`);
       }

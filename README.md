@@ -20,21 +20,35 @@ The project showcases the following customizations:
 
 To get started with this project:
 
+#### Basic Project Setup
+
 1. Clone the repository to your local machine.
-2. Install the dependencies by running `npm install`.
+2. Install the dependencies by running `pnpm install`.
 3. Setup Vercel using `vercel` command from the root directory. Install vercel cli if you don't have it using `npm i -g vercel`.
-4. Explore the `api` directory to understand how the function calling and custom LLM integrations and webhook event handling are set up.
-5. Review the types directory to see the data structures used for handling Vapi events and payloads.
-6. Check the data directory for sample data that the function for creative character prompts can use.
-7. Remove any unnecessary code and start adding your own logic.
-8. There is sample json in `./assistants` folder. You can use that to create Vapi assistant and then test it.
+4. You can start the project locally using command `pnpm start`
+5. You can deploy the project to vercel using command `pnpm deploy:prod`
 
-## Assistant Setup.
+#### Configuration
 
-- **Using Dashboard**: For you to create an assistant you can create a simple one by directly going to your dashboard and creating one from the UI.
-- **Using POST Endpoint**: You can also create your assistant using POST `https://api.vapi.ai/assistant` with your API Key (Dashboard > Accounts > Vapi Keys) as Bearer Token and choose any body from `./assistants` folder.
+1. create a .env file in your repository using the command `cp example.env .env`
+2. Get ur `OPENAI_API_KEY` from openai and update the `.env` file.
+3. From Vapi dashboard, you can get your Vapi Private key from **Dashboard > Accounts > Vapi Keys > Api Key** and update `.env` file
+4. Get ServerURL
 
-Once assistant is created You may setup your server Url (`http://<domain>/api/webhook`) in the Dashboard > Accounts > Settings > Server URL. This will set the server URL for all assistants. If you want to set the serverUrl per assistant by using `serverUrl` key in the assistant body while creating. 
+   1. Using Ngrok: Start the project locally using `pnpm start` and then use ngrok to get the url.
+   2. Using Vercel: Deploy functions to vercel using `pnpm deploy:prod` and get URL from the Vercel.
+
+   The serverURL to be configured in the **Dashboard > Accounts > Settings** is `https://<domain>/api/webhook` This has all the messages placeholder. You can also try `https://<domain>/api/functions/basic` or `https://<domain>/api/rag`
+
+5. There are sample request body in `./assistants` folder. Use them to create an assistant using the POST endpoint `https://api.vapi.ai/api/assistant` with any of the body from `./assistants`.
+6. Now you have an assistant created which you can talk with from the Vapi Dashboard.
+
+#### Explore and make changes.
+
+1. Explore the `api` directory to understand how the function calling and custom LLM integrations and webhook event handling are set up.
+2. Review the types directory to see the data structures used for handling Vapi events and payloads.
+3. Check the data directory for sample data that the function for creative character prompts can use.
+4. Remove any unnecessary code and start adding your own logic.
 
 ## Examples
 
