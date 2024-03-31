@@ -7,7 +7,7 @@ import {
 
 export interface Model {
   model: string;
-  systemPrompt?: string;
+  messages: ChatCompletionMessageParam[];
   temperature?: number;
   functions?: {
     name: string;

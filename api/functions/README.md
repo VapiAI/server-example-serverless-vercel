@@ -81,7 +81,7 @@ export const functionCallHandler = async (payload) => {
 
 ## Function Invocation
 
-You need to create a Vapi Assistant which will contain the function information and when to invoke it as part of the systemPrompt in the model configuration. Sample Assistant configuration is here.
+You need to create a Vapi Assistant which will contain the function information and when to invoke it as part of the systemPrompt in the messages in the model configuration. Sample Assistant configuration is here.
 
 ```JSON
 {
@@ -89,7 +89,13 @@ You need to create a Vapi Assistant which will contain the function information 
   "model": {
     "provider": "openai",
     "model": "gpt-3.5-turbo",
-    "systemPrompt": "You are a versatile assistant...",
+
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are a versatile assistant...",
+      }
+    ],
     "functions": [
       {
         "name": "getRandomName",

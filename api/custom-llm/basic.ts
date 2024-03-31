@@ -1,10 +1,13 @@
 import { VercelRequest, VercelResponse } from "@vercel/node";
 import OpenAI from "openai";
 import { envConfig } from "../../config/env.config";
+import { setCors } from "../../utils/cors.utils";
 
 const openai = new OpenAI({ apiKey: envConfig.openai.apiKey });
 
 export default async (req: VercelRequest, res: VercelResponse) => {
+  setCors(res);
+
   try {
     const {
       model,
@@ -30,8 +33,13 @@ export default async (req: VercelRequest, res: VercelResponse) => {
         },
       ],
     };
+    res.setHeader("Content-Type", "text/event-stream");
+    res.setHeader("Cache-Control", "no-cache");
+    res.setHeader("Connection", "keep-alive");
+    res.write(`data: ${JSON.stringify(response)}\n\n`);
+    res.end();
 
-    res.status(201).json(response);
+    // res.status(201).json(response);
   } catch (e) {
     console.log(e);
     res.status(500).json({ error: e });

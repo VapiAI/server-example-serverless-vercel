@@ -20,6 +20,7 @@ export default async (req: VercelRequest, res: VercelResponse) => {
       temperature,
       call,
       stream,
+      metadata,
       ...restParams
     } = req.body;
 

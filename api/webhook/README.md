@@ -7,7 +7,7 @@ Welcome to the guide on handling Server URL events with Vapi. The Server URL is 
 ### Function Calling
 
 - Event: function-call
-- Description: Triggered when an assistant determines a function needs to be called based on the systemPrompt.
+- Description: Triggered when an assistant determines a function needs to be called based on the systemPrompt in messages.
 - Use Case: Use this event to perform actions like sending emails or fetching data.
 - Example Implementation: See `.functionCall.ts` for handling function calls.
 
