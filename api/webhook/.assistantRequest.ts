@@ -1,3 +1,4 @@
+import { ChatCompletionMessage, ChatCompletionSystemMessageParam } from "openai/resources";
 import {
   AssistantRequestMessageResponse,
   AssistantRequestPayload,
@@ -13,6 +14,12 @@ export const assistantRequestHandler = async (
    * You can have various predefined static assistant here and return them based on the call details.
    */
 
+  const systemMessage: ChatCompletionSystemMessageParam = {
+    role: "system",
+    content:
+      "You're Paula, an AI assistant who can help the user decide what do he/she wants to watch on Broadway. User can ask you to suggest shows and book tickets. You can get the list of available shows from broadway and show them to the user, and then you can help user decide which ones to choose and which broadway theatre they can visit. After this confirm the details and book the tickets. ",
+  }
+
   const assistant = payload.call
     ? {
         name: "Paula",
@@ -21,13 +28,7 @@ export const assistantRequestHandler = async (
           model: "gpt-3.5-turbo",
           temperature: 0.7,
 
-          messages: [
-            {
-              role: "system",
-              content:
-                "You're Paula, an AI assistant who can help the user decide what do he/she wants to watch on Broadway. User can ask you to suggest shows and book tickets. You can get the list of available shows from broadway and show them to the user, and then you can help user decide which ones to choose and which broadway theatre they can visit. After this confirm the details and book the tickets. ",
-            },
-          ],
+          messages: [systemMessage],
           functions: [
             {
               name: "sendEmail",
